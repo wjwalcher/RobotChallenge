@@ -61,6 +61,7 @@ void loop() {
       break;
   }
   checkPos(movePot);
+  launch(launchBtn);
 }
 
 void checkPos(movePot){
@@ -72,6 +73,15 @@ void checkPos(movePot){
   }
   else{ 
     checkPos(movePot);
+  }
+}
+
+void launch(launchBtn){
+  if(launchBtn == LOW){
+    
+  }
+  else{hf
+    launch(launchBtn);
   }
 }
 
