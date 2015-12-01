@@ -1,11 +1,14 @@
 #include <Servo.h>
 Servo servo1;
+Servo servo2;
 int motorPin = 3;
+int servoPin = 6;
 void setup() {
   // put your setup code here, to run once:
- pinMode(1, OUTPUT);
+ pinMode(servoPin, OUTPUT);
  pinMode(motorPin, OUTPUT);
  servo1.attach(14);
+ servo2.attach(12);
  Serial.begin(19200);
 }
 
@@ -15,6 +18,7 @@ void loop() {
   int motorSpeed;
   int slidePot = analogRead(A0);
   int launchBtn = analogRead(A1);
+  int movePot = analogRead(A2);
   switch(slidePot){
     case '1'...'170':
       launchSpeed = 1;
@@ -56,11 +60,19 @@ void loop() {
       motorSpeed = 180;
       break;
   }
-  
-  if(launchBtn == LOW){
-      analogWrite(motorPin, motorSpeed);  
+  checkPos(movePot);
+}
+
+void checkPos(movePot){
+  if(movePot > 1000){
+    motorSpeed = 0;    
   }
-  else{
-    delay(10);
+  else if(movePot < 20){
+    motorSpeed = 0;
+  }
+  else{ 
+    checkPos(movePot);
   }
 }
+
+
